@@ -1,0 +1,104 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\inputencoding{utf8}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\title[Heap]{Heap Sort}
+\author{Ernesto Rodriguez - Juan Roberto Alvaro Saravia}
+\institute{
+    Universidad Francisco Marroquin \\
+    \medskip \textit{ernestorodriguez@ufm.edu - juanalvarado@ufm.edu}
+}
+
+\date[\today]{}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\newcommand{\buildHeap}[2]{
+    
+\begin{frame}
+
+\frametitle{Crear Heap}
+
+\begin{algorithm}[H]
+    \caption{Crear un heap}
+    \begin{algorithmic}[1]
+    \Procedure{crear\_heap}{$Ns$}
+
+    \For{$i\gets\mathtt{len}(Ns)/2$ {\bf downto} 0}
+    \State $\mathtt{heapify}(Ns,i)$
+    \EndFor
+    \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{itemize}
+    \item{¿Que invariante se utilizara? {#1}}
+    \item{¿Cual es la complejidad en tiempo? {#2}}
+\end{itemize}
+\end{frame}
+}
+
+\buildHeap{}{}
+
+\newcommand{\buildHeapImg}[1]{
+\begin{frame}
+    \frametitle{Crear Heap}
+    \begin{center}
+    \includegraphics[width=12cm]{#1}
+    \end{center}
+\end{frame}
+}
+
+\buildHeapImg{crearHeap.png}
+\buildHeapImg{crearHeap2.png}
+\buildHeapImg{crearHeap3.png}
+
+\buildHeap{
+    \begin{itemize}
+        \item{Los indices $2i$ e $2i+1$ encabezan un heap}
+    \end{itemize}
+}{}
+
+\buildHeap{
+    \begin{itemize}
+        \item{Los indices $2i$ e $2i+1$ encabezan un heap}
+    \end{itemize}
+}{
+    \begin{itemize}
+        \item{$\mathcal{O}(nlog(n))$}
+    \end{itemize}
+}
+
+\buildHeap{
+    \begin{itemize}
+        \item{Los indices $2i$ e $2i+1$ encabezan un heap}
+    \end{itemize}
+}{
+    \begin{itemize}
+        \item{$\mathcal{O}(nlog(n))$}
+        \item{¿Nos podemos acercar m\'as?}
+    \end{itemize}
+}
+
+
+
+\end{document}
