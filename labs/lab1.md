@@ -53,9 +53,10 @@ o *nulo* si no se encuentra el valor.
 ## Problema 2
 Dado el siguiente algoritmo de multiplicacion de matrices:
 
+
 ```
-Input: matriz A y matriz B
-Output: matriz C
+Input: matriz A (n x m) y matriz B (m x p)
+Output: matriz C (n x p)
 
 For i from 1 to n:
 	For j from 1 to p:
@@ -73,8 +74,7 @@ Demuestre cual el es *running time* de este algoritmo.
 
 Cual es el *worst-case running time* de este algoritmo?
 
-Como se compara a el *running time* de insertion sort?
-
+Explicar como se compara el *best-case y worst-case running time* de insertion sort contra bubble sort? 
 - - - -
 
-Fecha de entrega: 2 de Agosto 11:50 pm (media noche)
+Fecha de entrega: 2 de Agosto 11:59 pm (media noche)
