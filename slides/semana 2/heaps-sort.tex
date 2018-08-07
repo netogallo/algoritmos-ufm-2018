@@ -99,6 +99,31 @@
     \end{itemize}
 }
 
+\begin{frame}
+\frametitle{Heap Sort}
+
+\begin{algorithm}[H]
+    \caption{Heapsort}
+    \begin{algorithmic}[1]
+    \Procedure{heap\_sort}{$Ns$}
+
+    \State $\mathtt{crear\_heap}(Ns)$
+
+    \For{$i\gets \mathtt{len}(Ns)$ {\bf downto} 2}
+    \State $\mathtt{intercambiar}(Ns, 1, i)$
+    \State $\mathtt{heapify}(Ns,1,i)$
+    \EndFor
+    \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{itemize}
+\item{¿Complejidad?}
+\item{¿Invariantes?}
+\end{itemize}
+
+\end{frame}
+
 
 
 \end{document}
