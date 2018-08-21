@@ -24,6 +24,7 @@ Es el *running-time* de este algoritmo mejor, igual, o peor que el de heapsort?
 A = [13,19,9,5,12,8,7,4,21,2,6,11]
 ```
 3. Por que es mas utilizado Quicksort y no Heapsort sabiendo que el *worst-case running time* de Heapsort es mejor?
+4. Como evitariamos el *worst-case running time* del algoritmo de particion y Quicksort del libro?
 
 ## Problema 3
 **Quicksort**
