@@ -286,7 +286,76 @@ dise\~nado para guardar soluciones intermedias}
     \State{$\mathtt{return}\ r[n]$}
     \EndProcedure
     \end{algorithmic}
+¿Cual es la complejidad de este algoritmo?
 \end{algorithm}
-
 \end{frame}
+
+\begin{frame}
+\frametitle{Cuarto intento}
+\begin{itemize}
+    \item{Reducci\'on drastica de complejidad}
+    \item{Requiere un arreglo auxiliar, sin embargo,
+    la implementaci\'on original consume memoria mediante la recursi\'on}
+    \item{{\bf Problema:} Este algoritmo solamente nos retorna las ganancias
+    optimas, no los cortes que se deben realizar. ¿Soluci\'on?}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Cuarto intento}
+    \begin{itemize}
+        \item{Reducci\'on drastica de complejidad}
+        \item{Requiere un arreglo auxiliar, sin embargo,
+        la implementaci\'on original consume memoria mediante la recursi\'on}
+        \item{{\bf Problema:} Este algoritmo solamente nos retorna las ganancias
+        optimas, no los cortes que se deben realizar. ¿Soluci\'on?}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Cuarto intento}
+    \begin{itemize}
+        \item{Reducci\'on drastica de complejidad}
+        \item{Requiere un arreglo auxiliar, sin embargo,
+        la implementaci\'on original consume memoria mediante la recursi\'on}
+        \item{{\bf Problema:} Este algoritmo solamente nos retorna las ganancias
+        optimas, no los cortes que se deben realizar. ¿Soluci\'on?
+        \begin{itemize}
+            \item{Guardar las longitudes de todos los cortes realizados, no
+            solo el optimo.}
+        \end{itemize}
+        }
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Quinto intento}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Quinto intento}
+    \begin{algorithm}[H]
+        \caption{CortarMemorizadoInvertido}
+        \begin{algorithmic}[1]
+        \Procedure{CortarMemorizadoInvertido}{$p,l$}
+        \State{$\mathtt{let}\ res\gets\mathtt{int}[l+1]$}
+        \State{$\mathtt{let}\ cortes\gets\mathtt{int}[]$}
+        \For{$\mathtt{let}\ i\gets 0$ {\bf upto} $l$}
+            \State{$\mathtt{let}\ q\gets -\infty$}
+            \For{$\mathtt{let}\ j\gets 1$ {\bf to} $i$}
+            \If{$p[i]+res[j-i] > q$}
+            \State{$q\gets p[i]+res[j-i]$}
+            \EndIf
+            \State{$q\gets \mathtt{max}(q,p[i]+res[j-i]$}
+            \State{$\mathtt{push}(i,cortes)$}
+            \EndFor
+            \State{$r[j]\gets\ q$}
+        \EndFor
+        \State{$\mathtt{return}\ r[n]$}
+        \EndProcedure
+        \end{algorithmic}
+    ¿Cual es la complejidad de este algoritmo?
+    \end{algorithm}
+\end{frame}
+
 \end{document}
