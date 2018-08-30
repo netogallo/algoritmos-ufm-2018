@@ -184,18 +184,15 @@ A continuaci\'on se muestra la tabla de precios de cada segmento de acero:
     \begin{algorithm}[H]
         \caption{Cortar}
         \begin{algorithmic}[1]
-        \Procedure{Cortar}{$l$}
-        \If{$l\equiv 1$}
-        \State{$\mathtt{return}\ [1]$}
+        \Procedure{Cortar}{$p,l$}
+        \If{$n\equiv 0$}
+        \State{$\mathtt{return}\ 0$}
         \EndIf
-        \State{$\mathtt{let}\ resultado\gets [l]$}
-        \For{$\mathtt{let}\ i=2$ {\bf upto} $l$}
-        \State{$\mathtt{let}\ corte\gets [i]+\mathtt{Cortar}(l-i)$}
-        \If{$\mathtt{Precio}(corte)>\mathtt{Precio}(resultado)$}
-        \State{$resultado\gets corte$}
-        \EndIf
+        \State{$\mathtt{let}\ q\gets -\infty$}
+        \For{$\mathtt{let}\ i=0$ {\bf to} $l$}
+        \State{$q\gets \mathtt{max}(q,p[i]+\mathtt{Cortar}(p,n-i)$}
         \EndFor
-        \State{$\mathtt{return}\ resultado$}
+        \State{$\mathtt{return}\ q$}
         \EndProcedure
         \end{algorithmic}
     \end{algorithm}
@@ -205,4 +202,91 @@ A continuaci\'on se muestra la tabla de precios de cada segmento de acero:
     \end{itemize}
     \end{frame}
 
+\begin{frame}
+\frametitle{Segundo intento}
+\begin{itemize}
+\item{Crear un arreglo}
+\item{Cada vez que se encuentra una soluci\'on, almacenarla en el arreglo}
+\item{De esa manera, se evita tener que calcular multiples veces la misma soluci\'on}
+\item{Simplemente consiste en modificar el algoritmo que ya existe con un arreglo
+dise\~nado para guardar soluciones intermedias}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Segundo intento}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Segundo intento}
+    \begin{algorithm}[H]
+        \caption{CortarMemorizado}
+        \begin{algorithmic}[1]
+        \Procedure{CortarMemorizado}{$p,l$}
+        \State{$\mathtt{let}\ res\gets\mathtt{int}[l+1]$}
+        \For{$\mathtt{let}\ i\gets 0$ {\bf upto} $l$}
+            \State{$res[i]\gets -\infty$}
+        \EndFor
+        \State{$\mathtt{return}\ \mathtt{CortarMemorizadoAux}(p,l,res)$}
+        \EndProcedure
+        \end{algorithmic}
+    \end{algorithm}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Segundo intento}
+    \begin{algorithm}[H]
+        \caption{CortarMemorizadoAux}
+        \begin{algorithmic}[1]
+        \Procedure{CortarMemorizadoAux}{$p,l,res$}
+        \If{$res[l]\geq 0$}
+        \State{$\mathtt{return}\ res[l]$}
+        \EndIf
+        \State{$\mathtt{let}\ q\gets -\infty$}
+        \If{$n\equiv 0$}
+        \State{$q\gets 0$}
+        \Else
+        \For{$i\gets 1$ {\bf to} $n$}
+        \State{$q\gets \mathtt{max}(q,p[i]+\mathtt{CortarMemorizadoAux}(p,n-i,res))$}
+        \EndFor
+        \EndIf
+        \State{$r[n]\gets q$}
+        \State{$\mathtt{return}\ q$}
+        \EndProcedure
+        \end{algorithmic}
+    \end{algorithm}
+    ¿Podemos eliminar la recursion?
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+    \includegraphics[width=6cm]{wecan.jpg}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tercer intento}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tercer intento}
+
+\begin{algorithm}[H]
+    \caption{CortarMemorizadoInvertido}
+    \begin{algorithmic}[1]
+    \Procedure{CortarMemorizadoInvertido}{$p,l$}
+    \State{$\mathtt{let}\ res\gets\mathtt{int}[l+1]$}
+    \For{$\mathtt{let}\ i\gets 0$ {\bf upto} $l$}
+        \State{$\mathtt{let}\ q\gets -\infty$}
+        \For{$\mathtt{let}\ j\gets 1$ {\bf to} $i$}
+        \State{$q\gets \mathtt{max}(q,p[i]+res[j-i]$}
+        \EndFor
+        \State{$r[j]\gets\ q$}
+    \EndFor
+    \State{$\mathtt{return}\ r[n]$}
+    \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\end{frame}
 \end{document}
