@@ -1,0 +1,160 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{c} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=[sharp]c, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.cs}
+\end{itemize}
+}
+
+\begin{document}
+
+\begin{tabular}{l l}
+\multirow{6}{*}{\includegraphics[width=5cm]{../../recursos/logo.jpg}}
+ & Universidad Francisco Marroquin \\
+ & Facultad de Ciencias Economicas \\
+ & Computer Science \\
+ & Algoritmos y Complejidad \\
+ & Prof. Ernesto Rodriguez - \href{mailto:erodriguez@unis.edu.gt}{erodriguez@unis.edu.gt} \\
+ & Aux. Juan Roberto Alvarado
+\end{tabular}
+\\\\\\
+
+\begin{center}
+        \horrule{0.5pt}
+        \huge{Recuperaci\'on Parcial \#1} \\
+        \large{Fecha de entrega: 04 de Octubre, 2018 - 11:59pm} \\
+        \horrule{1pt}
+\end{center}
+
+\emph{Instrucciones: Resolver cada uno de los ejercicios siguiendo sus respectivas
+instrucciones. El trabajo debe ser entregado a traves de Github, en su repositorio del curso, colocado en una
+carpeta llamada "Recuperaci\'on 1". Al menos que la pregunta indique diferente, todas las
+respuestas a preguntas escritas deben presentarse en un documento formato pdf, el cual
+haya sido generado mediante Latex. }\\\\
+
+El objetivo de este trabajo es implementar el algoritmo de ordenamiento \emph{merge sort}
+utilizando un framework de computaci\'on distribuida. Tiene la libertad de escoger
+el framework y lenguaje, a continuaci\'on se presentan algunas sugerencias:
+\begin{itemize}
+        \item{\href{https://haskell-distributed.github.io/}{Cloud Haskell} (Haskell)}
+        \item{\href{https://dotnet.github.io/orleans/}{Orleans} (.Net)}
+        \item{\href{https://pgiri.github.io/dispy/}{Dispy} (Python)}
+        \item{\href{https://www.erlang.org/}{Erlang} (Erlang)}
+        \item{\href{https://www.open-mpi.org/software/ompi/v1.10/}{MPI} (c/c++)}
+        \item{\href{https://akka.io/}{Akka} (JVM)}
+\end{itemize}
+
+\section*{Descripci\'on}
+Su programa debe consumir una lista de oraciones en un documento de texto. Cada oraci\'on
+ocurrira en una linea diferente. El objetivo es distribuir la ejecuci\'on de merge
+sort en varios procesos o computadroas debido a que los frameworks de computaci\'on
+distribuidas son transparentes ante el interntet.
+\\\\
+Al final de la ejecuci\'on de su programa, se debe producir una lista que tenga
+todas las oraciones de la lista original ordenadas alfabeticamente por el codigo
+ascii. Puede asumir que solo se utilizaran letras (mayusculas y minusculas), numeros
+y espacios (no habran signos de puntuaci\'on).
+
+\section*{Evaluaci\'on}
+Una implementaci\'on funcional de este algoritmo con ejecuci\'on distribuida
+sera merecedora de un (30\%) adicional en su nota del examen parcial. Adicionalmente,
+los siguientes criterios seran evaluados para puntos extra:
+\begin{itemize}
+        \item{Lectura en paralelo de la lista de oraciones}
+        \item{Escritura en paralelo de la lista de oraciones}
+        \item{Criterios arbitrarios de ordenamiento}
+        \item{Utilizaci\'on eficiente de nodos. En otras palabras,
+        distribuir la carga optimamente seg\'un el numero de nodos
+        que se disponga para el procesamiento.}
+        \item{Interfaz web o grafica que facilite la utilizaci\'on
+        de su algoritmo}
+        \item{Lectura distribuida de archivos. En otras palabras que
+        los nodos puedan leer parte de la data localmente y retornar
+        un resultado consolidado al nodo principal.}
+\end{itemize}
+
+\end{document}
