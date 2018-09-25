@@ -1,0 +1,203 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\inputencoding{utf8}
+
+\mode<presentation> {
+    \usetheme{Madrid}
+}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\title[Codiciosos]{Analisis Aromatizado}
+\author{Ernesto Rodriguez - Juan Roberto Alvaro Saravia}
+\institute{
+    Universidad Francisco Marroquin \\
+    \medskip \textit{ernestorodriguez@ufm.edu - juanalvarado@ufm.edu}
+}
+
+\date[\today]{}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Metodo de Conteo}
+\begin{itemize}
+    \item{A cada operaci\'on se le asigna un {\bf costo}}
+    \item{Este costo se conoce como {\bf costo aromatizado}}
+    \item{Si una operaci\'on tiene un costo menor que su
+    {\bf costo aromatizado}, la diferencia se convierte
+    en {\bf credito}.}
+    \item{El {\bf credito} se puede utilizar para compensar
+    operaciones con costo m\'as alto que su {\bf costo aromatizado}.}
+    \item{El {\bf credito} debe ser positivo en todo momento.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ejemplo: Pila}
+\begin{itemize}
+    \item{La pila se encuentra en un estado inicial antes
+    de la ejecuci\'on del porgrama (pila vacia)}
+    \item{El estado de la pila se modificara mediante
+    una serie de operaciones.}
+    \item{Cada operaci\'on debe dejar suficiente credito
+    para poder aplicar la operaci\'on inversa (si es que la hay).}
+    \item{En otras palabras, el credito disponible debe ser suficiente
+    para que el comportamiento de la pila con credito sea consistente
+    con el comportamiento esperado.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ejemplo: Una Pila}
+{\bf Previamente:}
+\begin{tabular}{l l}
+    Push & 1 \\
+    Pop & 1 \\
+    Multipop & $min(s,k)$
+\end{tabular}
+{\bf Ahora:}
+\begin{tabular}{l l}
+    Push & 2 \\
+    Pop & 0 \\
+    Multipop & 0
+\end{tabular}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ejemplo: Una Pila}
+{\bf Intuici\'on:}
+\begin{itemize}
+    \item{Cada vez que hacemos push, adicional al elemento que fue empujado
+    se empuja una unidad de credito.}
+    \item{Cuando se desea hacer pop, se consume la unidad de credito que fue
+    dejada por la operacion push.}
+    \item{De esta manera, siempre se dispone de credito para la operaci\'on
+    pop sin importar el estado de la pila.}
+    \item{Debido a que solo se ``cuentan'' las operaci\'ones push, el costo
+    aromatizado es $\mathcal{O}(n)$ -- proporcional al numero de push.}
+\end{itemize}
+{\bf Pregunta: } ¿Que sucede si la pila no esta vacia al principio?
+\end{frame}
+
+\begin{frame}
+\frametitle{Ejemplo: Contador Binario}
+\begin{itemize}
+    \item{¿Cual es la operaci\'on que tiene un costo al incrementar un contador binario?}
+    \item{¿Que operaci\'on invierte el cambio hecho anteriormente?}
+    \item{¿Como podemos acreditar la 1era operaci\'on para que se puede llevar a cabo la segunda?}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ejemplo: Contador Binario}
+\begin{itemize}
+    \item{Cambiar un bit es la operaci\'on costosa en este ejemplo}
+    \item{{\bf Idea:} Cuano un bit se transforma de 0 a 1, se paga el costo.}
+    \item{Adicionalmente, se abona credito para poder regresar dicho bit a cero.}
+    \item{Cuando el bit se transforma a cero, se utiliza el credito abonado previamente.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ejemplo: Contador Binario}
+\begin{itemize}
+    \item{Cada operaci\'on, a lo sumo, convierte un bit de 0 a 1}
+    \item{Por lo tanto, cada operaci\'on tiene un costo de 2.}
+    \item{Los bits que pasan de 1 a 0 utilizan el credito disponible en cada
+    bit para lograrlo.}
+    \item{¿Cual es el costo total?}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ejemplo: Contador Binario}
+    \begin{itemize}
+        \item{Cada operaci\'on, a lo sumo, convierte un bit de 0 a 1}
+        \item{Por lo tanto, cada operaci\'on tiene un costo de 2.}
+        \item{Los bits que pasan de 1 a 0 utilizan el credito disponible en cada
+        bit para lograrlo.}
+        \item{¿Cual es el costo total?
+        \begin{itemize}
+            \item{$\mathcal{O}(n)$}
+        \end{itemize}
+        }
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Ejemplo: Contador Binario}
+    \begin{itemize}
+        \item{¿Que sucede si el contador no inica en cero?}
+        \item{¿Que sucede si se quiere decrementar el contador?}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Metodo potencial}
+\begin{itemize}
+    \item{El {\bf credito} acumulado se representa como un potencial,
+    no como credito asociado a un objeto.}
+    \item{El potencial puede ser liberado para financiar trabajo
+    futuro.}
+    \item{Se asocia un {\bf potencial} a la estructura de datos,
+    no a valores que se encuentran en ella.
+    \begin{itemize}
+        \item{Se define una funci\'on $\Phi(D_i)$ la cual determina
+        el potencial almacenado en la estructura $D_i$}
+        \item{El indicie $i$ de la estructura $D_i$ indica el
+        numero de operaciones que han sido aplicados a dicha
+        estructura.}
+    \end{itemize}
+    }
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Metodo Potencial}
+\begin{itemize}
+    \item{Sea $c_i$ el costo de la operaci\'on numero $i$}
+    \item{El {\bf costo aromatizado} $\hat c_i=c_i+\Phi(D_i)-\Phi(D_{i-1})$ de
+    la operaci\'on $i$}
+    \item{El {\bf costo aromatizado} de $n$ operaci\'ones por lo tanto es:
+    \begin{itemize}
+        \item{$\sum_{i=1}^{n} \hat c_i = \sum_{i=1}^{n}(c_i+\Phi(D_i) + \Phi(D_{i-1})=
+        \sum_{i=1}^n \hat c_i + \Phi(D_n) - \Phi(D_0)$}
+    \end{itemize}
+    }
+    \item{Si $\Phi(D_n)\geq \Phi(D_0)$, la suma de costos aromatizados es un limite
+    superior al costo actual.}
+    \item{Por lo general, se desconoce $n$, lo que significa que $\Phi(D_i)\geq \Phi(D_0)$
+    para todo $i$}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ejemplo: Pila}
+\begin{itemize}
+    \item{$\Phi(D_i)$ es el numero de objetos en la pila.
+        \begin{itemize}
+            \item{El valor de $\Phi(D_0)$ es $0$}
+            \item{Por lo tanto $\forall i>0.\ \Phi(D_i)>\Phi(D_0)$}
+        \end{itemize}
+    \item{¿Cual es el costo de la operaci\'on push?}
+    \item{¿Cual es el costo de la operaci\'on pop?}
+    }
+\end{itemize}
+\end{frame}
+
+\end{document}
