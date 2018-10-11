@@ -34,5 +34,7 @@ Algoritmia y Complejidad
 
 
 - - - -
+- Leer capitulo 19 para: 16 de octubre
+- Leet capitulo 21 para: 18 de octubre
 
 Fecha de entrega: 18 de Octubre 11:59 pm (media noche)
