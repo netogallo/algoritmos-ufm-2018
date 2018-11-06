@@ -125,8 +125,9 @@ Para ello, su programa debe inspeccionar codigo fuente Javascript y utilizar las
 funciones, clases, etc.). Aparte el programa debe prover una interfaz (grafica, web, linea de comandos,
 rest, etc.) para buscar objetos. Usted debe utilizar su creatividad para dise\~nar la interfaz de
 tal forma que permita filtrar los resultados de formas utiles. Por ejemplo, hacer una busqueda solamente
-de clases que hereden de la clase ``Foo''. Para todo objeto indexado por su crawler, se debe construir
-{\bf el arbol de busqueda} que se utilizo para llegar al objeto a partir del archivo origen.
+de clases que hereden de la clase ``Foo''. Debe existir un {\bf arbol abarcador} el cual se origina en
+el archivo que se haya dado como parametro al programa y este arbol abarque todos los archivos que se
+puedan localizar desde el origen.
 
 \section{Evaluaci\'on}
 El proceso de evaluaci\'on consistira de los siguientes pasos:
@@ -140,8 +141,8 @@ El proceso de evaluaci\'on consistira de los siguientes pasos:
                 \item{Buscar los metodos que acepten 2 parametros}
                 \item{Buscar las clases que heredan de ``Bar''}
         \end{itemize}}
-        \item{Por ultimo, se verificara que para cada resultado de la busqueda, se haya construido
-        el correspondiente {\bf arbol de busqueda}}
+        \item{Por ultimo, se verificara que para cada resultado de la busqueda, tenga
+        un camino dentro del {\bf arbol abarcador} del indice de archivos}
 \end{enumerate}
 
 Tambien se llevara a cabo una competencia contra los demas compa\~neros. Se utilizara un proyecto
